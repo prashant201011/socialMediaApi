@@ -8,6 +8,7 @@ const userDetails = schema({
   desc: { type: String, required: true },
   commentDetails: [{ userIdC: String, comment: String }],
   followers: [{ id: { type: String } }],
+  likes: [{ id: { type: String } }],
 });
 
 const mongSchema = mongoose.model("userDetails", userDetails);

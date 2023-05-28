@@ -106,3 +106,30 @@ exports.postFollowers = (req, res, next) => {
       console.log(err);
     });
 };
+
+exports.postLikes = async (req, res, next) => {
+  const userId = req.params.id;
+  const userIdL = req.body.id;
+
+  const value = await mongSchema.findById({ _id: userId });
+
+  if (!value.likes.includes(userIdL)) {
+    await mongSchema
+      .updateOne({ _id: userId }, { $push: { likes: { userIdL } } })
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    await mongSchema
+      .updateOne({ _id: userId }, { $pull: { likes: { userIdL } } })
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+};

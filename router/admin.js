@@ -18,4 +18,6 @@ router.post("/api/comment/:id", controller.postCommentUser);
 
 router.post("/api/followers/:id", controller.postFollowers);
 
+router.post("/api/likes/:id", controller.postLikes);
+
 module.exports = router;
